@@ -1,0 +1,304 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Meridian API",
+    "version": "2.4.0",
+    "description": "Synthetic API for the plinth mock app. Everything is invented."
+  },
+  "paths": {
+    "/v1/spend/summary": {
+      "get": {
+        "operationId": "spend.summary",
+        "summary": "Month-to-date spend",
+        "tags": [
+          "finops"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "monthToDate": {
+                      "type": "number"
+                    },
+                    "forecast": {
+                      "type": "number"
+                    },
+                    "budget": {
+                      "type": "number"
+                    },
+                    "lastMonth": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/spend/forecast": {
+      "get": {
+        "operationId": "budget.forecast",
+        "summary": "Projected month-end spend",
+        "tags": [
+          "finops"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "forecast": {
+                      "type": "number"
+                    },
+                    "budget": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/clusters": {
+      "get": {
+        "operationId": "cluster.health",
+        "summary": "Cluster fleet health",
+        "tags": [
+          "platform"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "clusters": {
+                      "type": "integer"
+                    },
+                    "nodesTotal": {
+                      "type": "integer"
+                    },
+                    "nodesUnhealthy": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/gpu/utilization": {
+      "get": {
+        "operationId": "gpu.utilization",
+        "summary": "GPU utilization and idle hours",
+        "tags": [
+          "platform",
+          "ml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "gpuUtilization": {
+                      "type": "number"
+                    },
+                    "idleGpuHours": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/slo": {
+      "get": {
+        "operationId": "slo.status",
+        "summary": "SLO and error budget",
+        "tags": [
+          "platform"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "slo": {
+                      "type": "number"
+                    },
+                    "sloTarget": {
+                      "type": "number"
+                    },
+                    "errorBudgetRemaining": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/alerts": {
+      "get": {
+        "operationId": "alerts.list",
+        "summary": "Open alerts",
+        "tags": [
+          "platform"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "incidentsOpen": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/training/runs": {
+      "get": {
+        "operationId": "training.runs",
+        "summary": "Training runs",
+        "tags": [
+          "ml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "runsActive": {
+                      "type": "integer"
+                    },
+                    "runsFailed24h": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/queue": {
+      "get": {
+        "operationId": "queue.status",
+        "summary": "Job queue depth",
+        "tags": [
+          "ml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "queueDepth": {
+                      "type": "integer"
+                    },
+                    "oldestQueuedSeconds": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/reports": {
+      "get": {
+        "operationId": "reports.saved",
+        "summary": "Saved reports",
+        "tags": [
+          "finops"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/reports/export": {
+      "post": {
+        "operationId": "billing.export",
+        "summary": "Export a billing report",
+        "tags": [
+          "finops"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
