@@ -5,7 +5,17 @@ import { readFileSync } from "node:fs";
 const text = readFileSync("src/catalog/specs.ts", "utf8");
 const block = /export const defaultDashboard[^=]*=\s*\[([\s\S]*?)\];/.exec(text);
 if (!block) throw new Error("defaultDashboard not found");
-const names = block[1].split(",").map((s) => s.trim()).filter(Boolean);
+// A spread of a local array (`...operations`) stands for that array's entries, in place.
+const listOf = (name) => {
+  const found = new RegExp(`const ${name}[^=]*=\\s*\\[([\\s\\S]*?)\\];`).exec(text);
+  if (!found) throw new Error(`${name} not found`);
+  return found[1].split(",").map((s) => s.trim()).filter(Boolean);
+};
+const names = block[1]
+  .split(",")
+  .map((s) => s.trim())
+  .filter(Boolean)
+  .flatMap((n) => (n.startsWith("...") ? listOf(n.slice(3)) : [n]));
 const defined = new Set([...text.matchAll(/export const (\w+) = spec\(/g)].map((m) => m[1]));
 const problems = [];
 if (new Set(names).size !== names.length) problems.push("a panel is listed twice");
