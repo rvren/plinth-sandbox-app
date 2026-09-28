@@ -445,14 +445,14 @@ export const meridianCatalog: Spec[] = [
  * seen it. That is the gap the persona audit reports and the promotion ladder closes.
  */
 export const defaultDashboard: Spec[] = [
+  alertsList,
+  gpuUtilization,
+  queueStatus,
+  clusterHealth,
   spendSummary,
   spendByTeam,
-  clusterHealth,
-  gpuUtilization,
   sloStatus,
-  alertsList,
   trainingRuns,
-  queueStatus,
   savedReports,
 ];
 
