@@ -444,14 +444,15 @@ export const meridianCatalog: Spec[] = [
  * `budget-forecast` is deliberately absent: it was built, it works, and no user has ever
  * seen it. That is the gap the persona audit reports and the promotion ladder closes.
  */
-const operations: Spec[] = [alertsList, gpuUtilization, queueStatus, clusterHealth];
+const operations: Spec[] = [alertsList, gpuUtilization, queueStatus];
 
 export const defaultDashboard: Spec[] = [
   ...operations,
   spendSummary,
+  trainingRuns,
   spendByTeam,
   sloStatus,
-  trainingRuns,
+  clusterHealth,
   savedReports,
 ];
 
